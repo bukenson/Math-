@@ -544,25 +544,34 @@
   }
 
   @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .hero { padding: 6rem 1.5rem 3rem; }
-    .stats-ribbon { padding: 1.2rem 1.5rem; gap: 0; }
-    .stat-item { padding: 0 1.2rem; }
-    .controls { padding: 1rem 1.5rem; top: 64px; }
+    nav { padding: 1rem 1.5rem; height: 64px; }
+    .nav-title { font-size: 0.7rem; }
+    .nav-title span { font-size: 0.55rem; }
+    .hero { padding: 6rem 1.5rem 3rem; min-height: 40vh; }
+    .hero-h1 { font-size: clamp(3rem, 10vw, 5rem); }
+    .stats-ribbon { padding: 1.2rem 1rem; }
+    .stat-item { padding: 0 1rem; }
+    .stat-num { font-size: 2rem; }
+    .controls { padding: 1.2rem 1.5rem; top: 64px; gap: 1rem; }
+    .search-wrap { flex: 1 1 100%; }
+    .decade-selector { flex: 1 1 100%; overflow-x: auto; padding-bottom: 0.5rem; }
     .content { padding: 2rem 1.5rem 4rem; }
     .names-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
     footer { padding: 1.5rem; flex-direction: column; text-align: center; }
   }
 
-  @media (max-width: 540px) {
+  @media (max-width: 600px) {
+    .nav-title { display: none; }
     .hero-watermark { display: none; }
-    .names-grid { grid-template-columns: 1fr 1fr; }
-    .stat-item { padding: 0 0.8rem; }
-    .stat-num { font-size: 1.6rem; }
+    .stats-ribbon { flex-wrap: wrap; justify-content: flex-start; gap: 1.5rem; }
+    .stat-item { border-right: none; padding: 0; }
+    .decade-btn { padding: 0.6rem 1rem; font-size: 0.55rem; }
+    .names-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 380px) {
-    .names-grid { grid-template-columns: 1fr; }
+    .hero-h1 { font-size: 2.8rem; }
+    .stat-num { font-size: 1.8rem; }
   }
 </style>
 </head>
