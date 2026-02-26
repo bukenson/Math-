@@ -66,15 +66,16 @@
   .nav-logo {
     width: 44px;
     height: 44px;
-    background: var(--gold);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--dark);
+    overflow: hidden;
+  }
+
+  .nav-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .nav-title {
@@ -1187,7 +1188,8 @@
   }
   .modal-info-value { font-size: 0.82rem; color: rgba(255,255,255,0.78); line-height: 1.5; }
   .modal-info-value a { color: var(--gold-light); text-decoration: none; }
-  .modal-info-value a:hover { text-decoration: underline; }
+  .modal-info-value a:hover 
+  { text-decoration: underline; }
   .modal-hobbies { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .hobby-tag {
     background: rgba(200,149,42,0.1); border: 1px solid rgba(200,149,42,0.25);
@@ -1220,7 +1222,9 @@
 <!-- NAV -->
 <nav>
   <a class="nav-brand" href="#">
-    <div class="nav-logo">Σ</div>
+    <div class="nav-logo">
+      <img src="images/logo.png" alt="OAU Logo">
+    </div>
     <div class="nav-title">
       Department of Mathematics
       <span>Obafemi Awolowo University, Ile-Ife</span>
