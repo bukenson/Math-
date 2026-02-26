@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alumni — Department of Mathematics, OAU Ile-Ife</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a4a2e;
+    --green-deep: #0d2a1a;
+    --green-mid: #2d6b45;
+    --gold: #c8952a;
+    --gold-light: #e8b84b;
+    --cream: #f5f0e8;
+    --cream-dark: #ede5d4;
+    --text: #1c2e22;
+    --text-muted: #5a7060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: hidden;
+    transition: background 0.5s ease;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3.5rem;
+    background: rgba(13, 42, 26, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    width: 42px; height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+  }
+
+  .nav-title span {
+    display: block;
+    color: var(--gold-light);
+    font-size: 0.68rem;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .nav-back {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+  .nav-back:hover { color: #fff; }
+
+  /* NAVIGATION */
+  .nav-links { display: none; } /* Default hidden on desktop to match original design */
+
+  /* HAMBURGER */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 101;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+
+  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-toggle.active span:nth-child(2) { opacity: 0; }
+  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 768px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      height: 100vh;
+      background: var(--green-deep);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+      display: flex; /* Override the default hidden state */
+      list-style: none;
+    }
+    .nav-links.active { right: 0; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-back { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 55vh;
+    background: var(--green-deep);
+    display: flex;
+    align-items: center;
+    padding: 8rem 3.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, var(--green-deep) 40%, transparent 100%),
+      radial-gradient(ellipse at 85% 50%, rgba(45,107,69,0.4) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+  .hero-img-wrap {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 55%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+    mask-image: linear-gradient(to left, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 60%, transparent 100%);
+  }
+
+  .hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .hero-watermark {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-55%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 18vw, 16rem);
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(200,149,42,0.08);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.04em;
+    z-index: 2;
+  }
+
+  .hero-content { position: relative; z-index: 3; max-width: 680px; }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 36px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 1.1rem;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+
+  .hero-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.8;
+    max-width: 520px;
+  }
+
+  /* STATS RIBBON */
+  .stats-ribbon {
+    background: var(--green-deep);
+    border-bottom: 3px solid var(--gold);
+    padding: 2.2rem 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow-x: auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0 3.5rem;
+    border-right: 1px solid rgba(200,149,42,0.15);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .stat-item:hover { transform: translateY(-3px); }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+  }
+
+  .stat-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+    font-weight: 600;
+  }
+
+  /* CONTROLS */
+  .controls {
+    background: #fff;
+    border-bottom: 2px solid rgba(26,74,46,0.06);
+    padding: 1.5rem 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 68px;
+    z-index: 50;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 0 1 360px;
+    min-width: 260px;
+  }
+
+  .search-wrap svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    color: var(--gold);
+    pointer-events: none;
+    transition: transform 0.3s;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    background: var(--cream);
+    border: 1px solid transparent;
+    color: var(--text);
+    padding: 0.8rem 1rem 0.8rem 3rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 4px;
+  }
+  .search-wrap input:focus {
+    background: #fff;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(200,149,42,0.1);
+  }
+  .search-wrap input:focus + svg {
+    transform: translateY(-50%) scale(1.1);
+  }
+  .search-wrap input::placeholder { color: var(--text-muted); font-style: italic; opacity: 0.6; }
+
+  .ctrl-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .decade-btns {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .dbtn {
+    background: transparent;
+    border: 1px solid rgba(26,74,46,0.22);
+    color: var(--text-muted);
+    padding: 0.4rem 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    white-space: nowrap;
+    border-radius: 2px;
+  }
+  .dbtn:hover { 
+    background: rgba(26,74,46,0.05); 
+    color: var(--green); 
+    border-color: var(--green);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(26,74,46,0.08);
+  }
+  .dbtn.active { 
+    background: var(--green); 
+    border-color: var(--green); 
+    color: var(--gold-light); 
+    box-shadow: 0 4px 15px rgba(26,74,46,0.15);
+  }
+
+  .result-info {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-left: auto;
+    white-space: nowrap;
+    opacity: 0.8;
+  }
+
+  /* CONTENT */
+  .content {
+    padding: 3rem 3.5rem 8rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .year-block { margin-bottom: 4rem; }
+
+  .year-hdr {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(200,149,42,0.15);
+  }
+
+  .year-tag {
+    background: var(--green);
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    padding: 0.4rem 1.4rem;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+    box-shadow: 4px 4px 0 rgba(200,149,42,0.1);
+  }
+
+  .year-cnt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .year-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,149,42,0.25), transparent);
+  }
+
+  .names-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.4rem 1.5rem;
+  }
+
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.65rem 1rem;
+    border-left: 3px solid transparent;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: default;
+    background: rgba(255,255,255,0.4);
+    border-radius: 0 4px 4px 0;
+  }
+  .name-row:hover {
+    border-left-color: var(--gold);
+    background: #fff;
+    transform: translateX(4px);
+    box-shadow: 4px 4px 15px rgba(26,74,46,0.06);
+  }
+  .name-row.hl {
+    background: rgba(200,149,42,0.1);
+    border-left-color: var(--gold);
+    box-shadow: inset 0 0 0 1px rgba(200,149,42,0.1);
+  }
+
+  .name-no {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(90,112,96,0.4);
+    flex-shrink: 0;
+    min-width: 24px;
+    font-weight: 600;
+  }
+
+  .name-text {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.95rem;
+    display: none;
+  }
+
+  /* BACK TO TOP */
+  #btt {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    width: 42px; height: 42px;
+    background: var(--green);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0; pointer-events: none;
+    transition: all 0.3s;
+    z-index: 200;
+    text-decoration: none;
+  }
+  #btt.on { opacity: 1; pointer-events: all; }
+  #btt:hover { background: var(--gold); color: #050e08; }
+
+  /* FOOTER */
+  footer {
+    background: #050e08;
+    border-top: 2px solid var(--gold);
+    padding: 1.8rem 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .foot-copy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+  .foot-euler {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: rgba(200,149,42,0.35);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .stats-ribbon { padding: 1.2rem 1.5rem; gap: 0; }
+    .stat-item { padding: 0 1.2rem; }
+    .controls { padding: 1rem 1.5rem; top: 64px; }
+    .content { padding: 2rem 1.5rem 4rem; }
+    .names-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    footer { padding: 1.5rem; flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 540px) {
+    .hero-watermark { display: none; }
+    .names-grid { grid-template-columns: 1fr 1fr; }
+    .stat-item { padding: 0 0.8rem; }
+    .stat-num { font-size: 1.6rem; }
+  }
+
+  @media (max-width: 380px) {
+    .names-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo">
+      <img src="images/logo.png" alt="OAU Logo">
+    </div>
+    <div class="nav-title">
+      Department of Mathematics
+      <span>Obafemi Awolowo University, Ile-Ife</span>
+    </div>
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#people">Staffs</a></li>
+    <li><a href="index.html#alumni">Alumni</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a class="nav-back" href="index.html">← Main Site</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-img-wrap">
+    <img src="images/Alumni.png" alt="OAU Alumni Legacy">
+  </div>
+  <div class="hero-watermark">Alumni</div>
+  <div class="hero-content">
+    <div class="hero-label">Legacy &amp; Community</div>
+    <h1>Our <em>Distinguished</em><br>Alumni</h1>
+    <p class="hero-desc">
+      A record of the graduates of the Department of Mathematics, Obafemi Awolowo University, Ile-Ife — honouring every man and woman who carried forward the torch of mathematical excellence since 1965.
+    </p>
+  </div>
+</section>
+
+<div class="stats-ribbon">
+  <div class="stat-item">
+    <div class="stat-num">519</div>
+    <div class="stat-lbl">Recorded<br>Alumni</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">40</div>
+    <div class="stat-lbl">Year<br>Groups</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1965</div>
+    <div class="stat-lbl">First<br>Graduates</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">2008</div>
+    <div class="stat-lbl">Latest<br>Record</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">43</div>
+    <div class="stat-lbl">Years of<br>Excellence</div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search alumni by name…" autocomplete="off" spellcheck="false">
+  </div>
+  <span class="ctrl-label">Decade:</span>
+  <div class="decade-btns" id="decadeBtns">
+    <button class="dbtn active" data-d="all">All Years</button>
+  </div>
+  <span class="result-info" id="resultInfo"></span>
+</div>
+
+<div class="content" id="content">
+  <div class="no-results" id="noResults">No alumni found matching your search.</div>
+</div>
+
+<a href="#" id="btt" title="Back to top">↑</a>
+
+<footer>
+  <div class="foot-copy">© 2026 Department of Mathematics, Obafemi Awolowo University, Ile-Ife, Nigeria. All rights reserved.</div>
+  <div class="foot-euler">e<sup>iπ</sup> + 1 = 0</div>
+</footer>
+
+<script>
+const alumniData = {
+  "1965": ["BADMUS, Ganiyu ademola", "ODUSANWO, Adedapo Olufunke", "BOLARINWA, Oyetunde"],
+  "1966": ["LAWAL, Adekorede", "OMISANDE, Samuel V.A"],
+  "1967": ["IMORU, Christopher Olutunde", "ADEBOYE, Enoch Adejare", "DUZE, Anne Inadi", "IKUENOBE, Abraham Osudia"],
+  "1968": ["AKINYELE, Gabriel Akintunde", "ATEWOGBOYE, Aderemi Babajide", "OJENGBEDE, Oladapo Ayinde", "JINADU, Bolaji Afolabi"],
+  "1969": ["OVBIOVBIO, John Omakarvhohn", "AREGBESOLA, Yaya Aremu", "AROWOGUN, Festus Bisi", "KEHINDE, James Adetunji Babajide", "ABATAN, Olusola Oyewo"],
+  "1970": ["FABUNMI, Emmanuel Adeniran"],
+  "1971": ["AINA, Johnson Ayodele", "AFUWAPE, Anthony Uyi", "ALUFOHAI, Imochimi Christian", "OJO, Mathew Oladejo", "FALODI, Enoch Akinrinsola", "ADEAGBO-SHEIK, Abdullaziz Gbadebo", "ABGOOLA, Babatunde Samson", "AKERELE, Michael Sunday", "FABUNMI, Thomas Olagoke", "OGUNLANA, Bolatito Christopher", "OSHO, Johnson Sunday", "OWOLABI, Safiu Adebisi"],
+  "1972": ["OLOTU, Jacub Taiyelola", "OWOJORI, Olusegun Olawale", "ADELODUN, Gabriel Ojo", "AJAYI, Richard Ajibade", "DIRU, Polo Ejoghene", "OLAGUNJU, Michael Adejumoke", "AKINOLA, Ayodele Joseph"],
+  "1973": ["AYENI, Reuben Olafenwa", "OTUNUBI, Joel Olayinka", "AKINPELU, Akinwale Ademola", "AKPAN, Edet Peter", "ANGAYE, Cleopas Officer", "GBADAMOSI, Rotimi Oluwambe", "KRAGHA, Peter Usikarore", "OGUNMOYELA, Joseph Kayode", "OLUWOLE, Samson Adebayo", "AGBELUSI, Joseph Soji", "OGUNJANA, Emmanuel Sunday", "KOJUSOLA, Elijah Babarinde", "OYENIRAN, Abiodun Ajibike"],
+  "1974": ["OBILADE, Titilola Olakunjo", "ADEGBOYE, Adeleke Olarinoye", "FEYISITAN, Olayemisi Nathaniel", "OLORUNSOLA, Samson Adebayo", "SAPORU, Funmilayo Oshogboye Westnand", "UGONO, Stephen Olatunde", "ADEDOYIN, Gbadegesin Joshua", "OGUNDOKUN, Adebayo Ogundiran", "OGUNSAKIN, Isaac Kolawole"],
+  "1975": ["ABURO, David Olatunde", "AJETUNMOBI, Michael Olusanya", "AKINLADE, Ayoola Adebowale", "AKINSEYE, Cladius Funmilayo", "ALAGBE, James Olawale", "OMOSHOWON, Idowu Remigious", "SOLARIN, Adewale Roland", "ALUKO, Vincen Olusola", "BANJO, Babatunde", "ESAN, Akinlolu Oladapo", "ADEOSUN, Folorunso", "AKINJOGBIN, Adediran Adunfe", "ALADESELU, Victor Adewale", "APOOLA, Moses Ilesanmi", "OKELEYE, Lasisi Gbadegesin", "OLUWAGBOHUNMI, Moses Adetobi", "FAKAYODE, James Oyeniran"],
+  "1976": ["OJIMELUKWE, Godwin Bosa", "ANUNWA, Alexander Ucheabianagbo", "ONI, Emmanuel Sunday", "OGUNYEMI, Olabode Theophilus", "TOKUN, Olapade Adeyemi", "UZOMA, Innocent Avugara", "YERITUBO, Cyril Edit", "ANENE, Ropnard Okeleke", "OGRA, Richard Ayekomiolgbon", "FADAHUN, Aremu Sylvester", "OLAYIWOLA, Jacob Oyetoro", "SANUSI, Raski Ayinde", "AJALA, Godwin Olabunmi", "OWOLABI, Gabriel Ayodele", "ADEOYE, Sunday Olatunjio", "OWOYELE, Ferdina Ilesanmi"],
+  "1977": ["AJIBOYE, Samuel Bamidele", "IGWEONWU, Samuel Davis", "ISIAKPONA, Ifeyinwa Ngozi", "OGUNSEYE, Amos Olusegun", "OWOEYE, Isaac Abiodun", "ADENIBA, Stephen Babatunde", "AWE, Mathew Adeniran", "KAYODE, Victor Adebiyi", "OMOROGBE, Daniel Nosakhare", "DUROWODU, Mansurudeen Olawale", "ABULOKWE, Yvonne Ufeli"],
+  "1978": ["ATONA, Lasisi"],
+  "1979": ["ADEWUSI, Adeleke Adetola", "OJIWUSI, Emmanuel Adekanmi"],
+  "1980": ["MADUFORO, Anayochukwu Basil", "ADELOWO, Adebayo Samuel", "ARAMIDE, Jacob Olusegun", "AYANDA, Yaqub Adio", "ADEBULEHIN, Kolawole", "ESSI, Nyong Okon", "NJOKU, Obidinma Okon", "YUSUF, Adunni Jemilat", "AJAYI, Samuel Afolagboye"],
+  "1981": ["AFOLABI, Kehinde Omobola", "AGORZIE, Cladius Jamike", "CHILAKPU, Desmond Ogbonna", "ONAFOWOKAN, Omobolaji Ayodele", "TAIWO, Adefioye Omobolawa", "OKORAFOR, Emmanuel Onyebachi", "UBESIE, Ofoegbu Edmund", "ODEDINA, Philemon Omoyemi", "BRAIDE, Richard Oriye", "NWUME, Innocent Obiekwu", "OJO, Abel Olatunde", "MOJEKWU, Joseph Nnamdi", "OSSAIGA, Dich Azuka"],
+  "1982": ["MMEGWA, Albert Obiekeh", "ADULOJU, Ebenezer Babatunde", "AKERE, Abiedi Charles", "ESSIEN, Nkese Etim", "NWORUH, Godwin Emeka Iwu", "OLA, Kafaru Babatunde", "ONYEAGOCHA, Sydney Iheanyi", "ADEWOLE, Adebayo", "EBOHON, Jane Osoubamiotole", "IGWE, Anakwe Okey", "ONYEGBADO, Jude Onyebushi", "AKPAN, Victor"],
+  "1983": ["OKOYA, Samuel Segun", "BOSEDE, Alfred Olufemi", "OKEKE, Godwin Ogadi-Micky", "SALAWU, Isiaka Ayinla", "LAYENI, Olurotimi Olatunde", "ANAEKWU, Patrick Nnanwueba", "ANENE, Edwin Chukwudezie", "OKOYE, Patty Chinyere"],
+  "1984": ["OLAREWAJU, Isiaka Akanmu", "OTTUN, Adebodun Saliman", "UNACHUKWU, Godwin Nnamdi", "UDEZE, Cornelius Emaka", "DIKE, Alban Ikechukwu", "OLUBOWALE, Kehinde Olukunle", "AYENI, Akinsanmi Enoch", "ODULAJA, Oyebola Adeoye", "AZI, Boniface Uchenna", "ONYEKIGWE, Obodo-oma Simeon", "OLATUNDE, Kamarudeen", "SANGOBOWALE, David Gbesan", "OYENEYIN, Gafaru Oladiran", "ODEYEMI, Yetunde Olubukola", "OTOBOH, Francisca Etanke", "OYEDARA, Kolawole Adeyeye", "SOLARIN, Babatunde", "AYOMIDE, Olapade Isaac", "ADESINA, Akinbowale Kayode"],
+  "1985": ["UKPERA, Awarga Simeon", "ADUWO, Jokotola Veronica", "ADESAANU, Abiodun Olaribigbe", "FABUSUYI, Adebayo Babajide", "EGBE, Balfour Ariorishebafo", "OYEFESO, Temitope Oluseye", "AKINMAGBE, Hezekiah Olusola", "SANGOSANYA, Lateef Adeleke", "LOLUKOGA, Mutiu Olatunde", "ANIWE, Folorunsho Bamidele", "OLALEYE, Oyewole David", "SABODU, Olatunji Olugbenga", "ADEBIYI, Michael Bamidele", "ADEDEJI, Peter Adebisi", "ADENIJI, Joseph Olugbade", "AFUAPE, Ramon", "OKAGU, Francis Ezike"],
+  "1986": ["ODHOGBI, Joe Onoriode", "AZEEZ, Moshood Gbolagade", "DUROJAYE, Abimbloa Gbolagade", "AYO-VAUGHAM, Olayinka Olusegun", "OLOPADE, Lekan Idowu Kareem", "AKINTUNDE, Adekunle Ayodeji", "AKINOLA, Olarewaju Sule", "MADUKWE, Anthony Chukwuemeka", "YUSSUF, Adegboyega", "AKINTAYO, Akintunde Akinbode", "BALOGUN, Adeleke Mujaidu", "BENSON, Oluwatoyin Olufemi", "JAIYEOLA, Olanrewaju Bamidele", "BAKARE, Adebayo Saka", "OLUWASESIN, Oluwafemi Michael", "AGBONIFO, Benedict Chiyamhen", "MACAULY, Oluwaseyi Adeoye"],
+  "1987": ["MAKINDE, Oluwole Daniel", "OYETUNDE, Bamidele Sunday", "ABIMBOLA, Adeniyi Mufutau", "AJAYI, Comfort Folashade", "FARAYOLA, Philip Iyiola", "OGUNTUASE, Joseph Kolawole", "OYEHAN, Albert Olaoluwa", "ADESAKIN, Raimi Olalere", "ILELABOYE, Johnson Babalola", "FANIRAN, Folasade Omotoyosi", "OMITOGUN, Ronke Adunni", "MORDI, Emmanuel Shola", "ADEDEJI, Olatokunbo Olufemi", "AKAMO, Azeez Sinaola", "FALADE, Timothy"],
+  "1988": ["Olatunde, Nicholas Oladipo", "Oyetunji, Olufemi Oyeyemi", "Adenuga, Olajide Adewale", "Faseru, Oluwafunso Omotayo", "Esigbone, Nathaniel", "Afolabi, Ojo Jimoh", "Kumolu, Ifedoyin Omolola", "Asa, Soladoye Sunday", "Lawa, Fatai Kolawole", "Abimola, Isiaka Olu", "Olaomi, Olatunji J.", "Abushe, Omojero Henry", "Adamu, Adunola Omolola", "Emah, Peter Bassey", "Salami, Olalekan M.", "Sale, David Olutayo", "Adenegan, Kehinde Ayokunle", "Lawal, Ibrahim Sijuwade", "Olapade, Olakekan", "Ogungbemi, Martins Ojo", "Atanda, Stephen Oluleye"],
+  "1989": ["Sokunbi, Shuaib Adeola", "Adamson, Michael Eweso", "Adegbule, Raphael Adeola", "Fagbewesa, Oladeji James", "Salam, Nureni", "Ayorinde, Rhoda Shuaib", "Adedokunbo, Olumide Olukemi", "Akande, Olusola Solomon", "Aluko, Olasupo"],
+  "1990": ["Akinhanmi, Adewale Olukayode", "Egbebunmi, Ebenezer Olukayode", "Oyedele, Roseline Oyeyemi", "Abdul-Yekeen, Rasheed Posi", "Abisoye, Samson Adebayo", "Aduroja, Olalekan O.", "Akinloye, Oyedijo Bosede", "Fakolujo, Elizabeth Abimbola", "Oladipupo, A. Fatai", "Onaolapo, Abiodun Joshua", "Salami, Arinlade Arike", "Sulaiman, Mufiat Folasade", "Tijani, Akeem Alani", "Efemini, Edwin E."],
+  "1991": ["Abodunrin, Amidu Oyeniran", "Ijaoba, Yussouff Oyediran", "Odeleke, Odewale Mukaila", "Okon, Obong Peter Edet", "Salami, Rasidat Omotayo", "Toluse, Emmanuel Rotimi", "Surakatu, Ibikunle", "Abe, Titus Sunday", "Olowoporoku, Yinka Titus", "Adeola, Adesola Adenike", "Adelodun, Olusegun Ayodele", "Adewale, Muyiwa Adebayo", "Odofin, Monday Paul", "Sulaiman, Mufiat Folasade", "Adeshipo, Adetonu", "Odunfa, Odunlami", "Sottin, Adesina Samuel", "Adeleke, Abduraman A.", "Adewumi, Edward Adebusuyi", "Akinbodewa, Olusegun E.", "Kolade, Emmanuel Olaolu", "Muhamumed, Rauf", "Owoo, Akeem Arogundade", "Omole, Folorunso Tolu", "Adediran, John Oluseye"],
+  "1992-1993": ["Olasupo, Kolawole I.", "Adeniran, Olusola John", "Ajadi, Suraju O.", "Akomolafe, Sunday", "Babalola, Oladeji Kunle", "Kolawole, Abiodun", "Obayemi, Adebowale", "Ojo, Kolade", "Olusa, Kolawole U.", "Osinake, Adedotun A.", "Otubusen, Temitope A.", "Sunday, Godwin Godoy", "Elujene, Osondu M.", "Obajumo, Amodu", "Odujinrin, Bamidele Adeyemi", "Oparemi, Oluwatoyin Mariama", "Otaigbe, Osioma", "Ijadunola, Enoik Adebayo", "Olawale, Temitope Akintayo", "Ngwa, Ernest Mfobujong", "Owojuyigbe, Charles", "Adesiyan, Saka Abiodun", "Matanmi, Murisiku Akanji", "Adeniyi, Adedoyin", "Afolabi, Kayode John", "Osatunberu, Banji B."],
+  "1994": ["Olapade, Kehinde Adetayo", "Layeni, Patrick O.", "Awolowo, Wednesday Ajibola"],
+  "1996": ["Akinola, Bamikole Emmanuel", "Akpe, Anthony Joshua", "Odejide, Samuel Ayodele", "Omojola, Babalola Benjamen", "Adewumi, Adesegun Abayomi", "Igun, Bolajoko Victoria", "Shittu, Akinropo Mojeed", "Osuntubo, Seun", "Akano, Olubunmi Ruth", "Fasipe, Ayorinde Olasupo", "Moritiwon, Kehinde", "Adedokun, Rachael Toyin", "Dafe, Charles Idoh", "Adeleke, David Adewumi", "Ibinayin, Ayodele Stephen", "Obafemi, Abayomi Goriola", "Taiwo, Emmanuel Oluwatoyin", "Bakare, Oluleye Eniola", "Ige, Abioye Abiona", "Ojo, Kolade Opeyemi", "Adekambi, Damilola Bolanle", "Adewuyi, Israel Olusegun", "Kolejo, Yewande Efuntade", "Olokuntoye, Gbenga Ayodeji", "Saliu, Fatai Abiodun", "Mustapha, Oluwatoyin Sariu", "Adetomiwa, Lydia Olutoyin", "Bishi, Alade Issa", "Emabino, Osuoma Musa", "Simon, Amin", "Amadou-Ide, Abubaka", "Ogunkunle, Akintola Moses", "Olasupo, Theophilus Kolade", "Salami, Waheed Olaniyi", "Lawal, Musibau Akanni"],
+  "1997": ["Agboola, Adegoyega Adeboye", "Jayeoba, Olufemi Moses", "Adeosun, Ayoade Adelowo", "Lawal, Samson Olatunji", "Ogungbe, Olayemi Korede", "Awopeju, Olajide Aremu", "Fajimi, Robert Fakunle"],
+  "1998": ["Adetunji, Adesola A.", "Komolafe, Olufemi", "Binuyo, A. Olukayode", "Ogunwo, Abayomi A.", "Adunoye, Adegboyega", "Olofinmoyin, Ayoola"],
+  "1999": ["Afolabi, Adetutu Adeola", "Ogunlowo, Olumide Michael", "Olurode, Kehinde Adam"],
+  "2000": ["Aluko, Abiola Wale", "Lawal, Kamil Oyedeji", "Agboola, Opeoluwa Mark", "Akinwumi, Akinyemi Seun", "Kehinde, Olumuyiwa Jeremiah", "Adeoti, Fredrick Olusegun", "Monday, James Unam", "Oresajo, Adeoye Oluwaseun", "Adekoya, Benjamin Olanrewaju"],
+  "2002": ["Adebona, Ibikunle", "Okelola, Olayide Chris", "Akpan, Ibok Ime", "Orodu, Evelyn Tabebiere", "Adeleye, Olabode Emmanuel", "Animashaun, Odunayo Michael", "Sowumi, Olufemi Olanrewaju", "Falase, Oluwabunmi Funmilayo", "Osakwe, Pamela Obiagelu", "Ayisire, Okeogheneyovwe Onokero", "Oladejo, Ayobami Abiodun", "Idowu, Olumide Olaitan", "Odueyungbo, Adefowope Olorunwa", "Adesakin, Taiwo Johnson", "Iyoha, Kenneth Ideyemen", "Gbadegesin, Damilola Ayodele", "Ogunbode, Olusegun John", "Sofowora, Konyinsola Tolulope"],
+  "2003": ["Odebunmi, Kola Daniel", "Aderogba, Adebayo Abiodun", "Fabelurin, Olanrewaju Olabiyi", "Fareo, Adewumi Gideon", "Ireka, Ikenna Ebubechukwu", "Akinyemi, Akinhanmi Ololade", "Iwayemi, Olawumi Atinuke", "Osineye, Abayomi Kehinde", "Raiwe, Simeon Uzor", "Tijani, Kamiludeen Rotimi", "Enemali, Christopher Adejoli", "Nwazeapu, Chibuzor Louise", "Familade, Tolulope Oluwaseyi", "Afolayan, Adebowale Olanrewaju", "Osuntuyi, Ayokunle Anthony", "Sajobi, Timothy Tolulope", "Akinyele, Kazeem Olalekan", "Oyebamiji, Oluwole Kehinde", "Akinboade, Akintunde Adeolu", "Akinbode, Taiwo Taofeek", "Ampitan, Olubukola Abosede", "Fyn-Sydney, Betty Iboroma", "Kosamotu, Eniola Elias", "Olabode, Samson Sule", "Oniyide, Olusola David", "Fasunon, Olufayo Ayodeji"],
+  "2004": ["Akinpelu, Ademola John", "Jenrola, Dolapo Tosin", "Ogunbanjo, Ramon", "Ogunro, Temitope Oyewumi", "Adediran, Olugbenga Adedotun", "Dinyo, Akinlolu Bayonle", "Obabiyi, Akinbola Funmi", "Adetunji, Ramoni Adeoye", "Alonge, Oluwasegun Oluwadare", "Ezike, Uchefuna Ngonadi", "Nwoke, Uchechukwu Angela", "Fadiora, Oluwaseun Jacob", "Haliu, Omobolaji Yusuf", "Adioha, Sandra Obiageriaku", "Bassey, Idoreyin Hope", "Olaniyi, Mobolaji Olaoluwa"],
+  "2006": ["Monye, Onweasu", "Ologundudu, Ojo Olakunle", "Iseghohi, Gavin Abraham", "Owatemi, Dare Samuel", "Disu, Omolara Gloria", "Ucoba, Nehemiah Archesare", "Oludare, Idowu Oluwasayo", "Asade, Azeez Adesina", "Adesina, Babatunde Oluwafisayo", "Awe, Damilola Ayodeji", "Olokuntoye, Bolanle Adeola", "Adebayo, Busuyi Ojo", "Omolokun, Oluwagbenga", "Oyedepo, Taiwo Opeyemi", "Fadodun, Odunayo Olawuyi", "Awopeju, Oluseyi Adebayo", "Balogun, Mohammed Adeyinka", "Bello, Saheed Adekunle", "Ibidapo, Abimbola Olanrewaju", "Oladunmoye, Yemi Titilayo", "Olakanle, Ayomiposi Mathew", "Oni, Ebenezer Ayodele", "Opasanya, Ayokunnumi Abiodun", "Raheem, Akeem Omoniyi", "Sole-Adeoye, Oluwasegun Gabriel", "Tomo, Olalekan Olayemi"],
+  "2007": ["Adebayo, Tolulope Cornelius", "Akaso, Idowu Ayoyemi", "Borokinni, Adebowale Samuel", "Oshinubi, Titilope Christianah", "Alaba, Oluwagbemiga James", "Awopetu, Olubukola Tayo", "Buremo, Sikiru", "Ogunmilade, Olufunke Margaret", "Oguntoyinbo, Olatubosun Segun", "Jejeniwa, Olaoluwa Ayodeji", "Adeleke, Lukman Olansile", "Oloyede, Oluyemi Oluwaseun", "Abe, Olayowola Oladapo", "Ojomu, Olaiya Kayode", "Bamidele, Ifedayo Alex", "Ogunbajo, Oluwasegun Adetola", "Oyedokun, Kunle Folorunso", "Rufai, Olasunkanmi Olusina", "Akinlonu, Temitope Olanrewaju", "Adetunbi, Adedoyin Temitope", "David, Oluwabusola Olajumoke", "Abunu, Alaba Omeiza", "Adeosun, Adeyemi Saheed", "Raji, Iyabo Khadijat", "Ilori, Tolulope Emmanuel", "Eghwerido, Joseph Thomas", "Adeyemo, Adebayo Oyekolade", "Atanda, Akeem Arisekola", "Ekundayo, Tosin Alaba", "Olufowobi, Kehinde Temitope", "Bademosi, Adeola Wvelyn", "Awosanya, Babatunde Oluwasegun", "Odulana, Adedotun Adetayo", "Afolabi, Nasimot Omowunmi", "Mbonu, Oliver Onyemachi", "Ogbu, John Chibueze", "Adegoke, Dayo Segun", "Ogundare, Tosin Alajide", "Olaniran, Saheed Olaposi", "Azoganokhai, Celestine Emhoabiro", "Akinyele, Oluwaseun Rotimi", "Nwaka, Blessing Ugoeze"],
+  "2008": ["Akeju, Boluwaji", "Amadi, Chibueze", "Karokatose, Gbenga Ben", "Kolawole, Bolanle B.", "Adewumi, Christiana Yetunde", "Ajuluchukwu, Obiageli Theodora", "Eruonakpo, Victor Akpovona", "Aibinu, Mathew O.", "Oyero, Oyebola E.", "Umar, Bilyaminu O.", "Abolaji, Gbemisola", "Akinbobola, Emmanuel T.", "Oginni, David O.", "Okoli, Chimezie Ugo", "Aina, Paul O.", "Ikulala, Olawale Philemon"]
+};
+
+const TOTAL = 519;
+
+// Build decade filter buttons
+const decades = new Set();
+Object.keys(alumniData).forEach(y => {
+  const yr = parseInt(y);
+  const dec = Math.floor(yr / 10) * 10;
+  decades.add(dec);
+});
+
+const btnContainer = document.getElementById('decadeBtns');
+[...decades].sort((a,b)=>a-b).forEach(dec => {
+  const b = document.createElement('button');
+  b.className = 'dbtn';
+  b.dataset.d = dec + 's';
+  b.textContent = dec + 's';
+  btnContainer.appendChild(b);
+});
+
+function getDecadeStr(year) {
+  return (Math.floor(parseInt(year) / 10) * 10) + 's';
+}
+
+function render(search, decade) {
+  const content = document.getElementById('content');
+  const noResults = document.getElementById('noResults');
+  const resultInfo = document.getElementById('resultInfo');
+
+  content.querySelectorAll('.year-block').forEach(e => e.remove());
+
+  const q = search.trim().toLowerCase();
+  let shown = 0;
+
+  Object.entries(alumniData).forEach(([year, names]) => {
+    if (decade !== 'all' && getDecadeStr(year) !== decade) return;
+    const matched = q ? names.filter(n => n.toLowerCase().includes(q)) : names;
+    if (!matched.length) return;
+    shown += matched.length;
+
+    const block = document.createElement('div');
+    block.className = 'year-block';
+
+    block.innerHTML = `<div class="year-hdr">
+      <div class="year-tag">${year}</div>
+      <div class="year-cnt">${matched.length} graduate${matched.length !== 1 ? 's' : ''}</div>
+      <div class="year-rule"></div>
+    </div>`;
+
+    const grid = document.createElement('div');
+    grid.className = 'names-grid';
+
+    matched.forEach((name, i) => {
+      const row = document.createElement('div');
+      row.className = 'name-row' + (q && name.toLowerCase().includes(q) ? ' hl' : '');
+      const num = names.indexOf(name) + 1;
+      row.innerHTML = `<span class="name-no">${String(num).padStart(2,'0')}</span><span class="name-text">${name}</span>`;
+      grid.appendChild(row);
+    });
+
+    block.appendChild(grid);
+    content.insertBefore(block, noResults);
+  });
+
+  if (shown === 0) {
+    noResults.style.display = 'block';
+    resultInfo.textContent = '';
+  } else {
+    noResults.style.display = 'none';
+    resultInfo.textContent = q || decade !== 'all'
+      ? `Showing ${shown} of ${TOTAL} alumni`
+      : `${TOTAL} alumni across ${Object.keys(alumniData).length} year groups`;
+  }
+}
+
+let activeDecade = 'all';
+render('', 'all');
+
+// Search
+let timer;
+document.getElementById('searchInput').addEventListener('input', function() {
+  clearTimeout(timer);
+  timer = setTimeout(() => render(this.value, activeDecade), 180);
+});
+
+// Decade filter
+document.getElementById('decadeBtns').addEventListener('click', e => {
+  const btn = e.target.closest('.dbtn');
+  if (!btn) return;
+  document.querySelectorAll('.dbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeDecade = btn.dataset.d;
+  render(document.getElementById('searchInput').value, activeDecade);
+});
+
+// Back to top
+window.addEventListener('scroll', () => {
+  document.getElementById('btt').classList.toggle('on', window.scrollY > 500);
+});
+
+// Mobile Menu Toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+const navLinksItems = document.querySelectorAll('.nav-links a');
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  navLinksItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+}
+</script>
+</body>
+</html>
