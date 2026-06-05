@@ -317,7 +317,7 @@
   }
 
   .ticker-item::before {
-    content: '∑';
+    content: '\2211';
     color: var(--gold);
     font-size: 1rem;
   }
@@ -544,9 +544,67 @@
   /* NEWS */
   .news { background: var(--cream); }
 
+  .announcement-alert {
+    margin-top: 2rem;
+    background: #fff;
+    border: 1px solid rgba(26,74,46,0.14);
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 12px 34px rgba(13,31,21,0.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.1rem 1.25rem;
+  }
+
+  .announcement-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+  }
+
+  .announcement-alert h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: var(--green);
+    margin-bottom: 0.35rem;
+  }
+
+  .announcement-alert p {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .announcement-action {
+    border: 1px solid rgba(26,74,46,0.25);
+    background: var(--green);
+    color: #fff;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.85rem 1rem;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .announcement-action:hover,
+  .announcement-action:focus-visible {
+    background: var(--gold);
+    color: var(--dark);
+    outline: none;
+    transform: translateY(-1px);
+  }
+
   .news-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
     margin-top: 3rem;
   }
@@ -572,7 +630,44 @@
     justify-content: center;
   }
 
-  .news-card:first-child .news-card-image { height: 260px; }
+  .news-card .news-card-image { height: 260px; }
+
+  .flyer-trigger {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    background: transparent;
+    display: block;
+    cursor: zoom-in;
+    position: relative;
+  }
+
+  .flyer-trigger img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .flyer-trigger:hover img {
+    transform: scale(1.02);
+  }
+
+  .flyer-hint {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    background: rgba(13,31,21,0.82);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgba(200,149,42,0.45);
+  }
 
   .news-card-image .img-pattern {
     font-family: 'JetBrains Mono', monospace;
@@ -614,7 +709,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .news-card:first-child .news-body h3 { font-size: 1.4rem; }
+  .news-body h3 { font-size: 1.2rem; }
 
   .news-body p {
     font-size: 0.82rem;
@@ -1161,10 +1256,74 @@
     font-size: 0.58rem; letter-spacing: 0.08em;
     color: rgba(255,255,255,0.38); text-transform: uppercase;
   }
+  .flyer-lightbox-box {
+    background: #f9f6ef;
+    border: 1px solid rgba(200,149,42,0.45);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.38);
+    max-width: min(880px, 94vw);
+    max-height: 92vh;
+    width: auto;
+    position: relative;
+    padding: 0.75rem;
+    transform: translateY(28px) scale(0.97);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flyer-lightbox {
+    background: rgba(5,14,8,0.78);
+  }
+  .flyer-lightbox .modal-close {
+    top: -0.9rem;
+    right: -0.9rem;
+    background: var(--gold);
+    color: var(--dark);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+  }
+  .flyer-lightbox .modal-close:hover,
+  .flyer-lightbox .modal-close:focus-visible {
+    background: #fff;
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+  .flyer-lightbox.open .flyer-lightbox-box { transform: translateY(0) scale(1); }
+  .flyer-lightbox-image {
+    max-width: 100%;
+    max-height: calc(92vh - 1.5rem);
+    display: block;
+    object-fit: contain;
+  }
   @media (max-width: 680px) {
     .modal-box { grid-template-columns: 1fr; }
     .modal-photo-col { min-height: 260px; }
     .modal-info-grid { grid-template-columns: 1fr; }
+    .flyer-hint {
+      right: 0.75rem;
+      bottom: 0.75rem;
+      font-size: 0.52rem;
+      padding: 0.4rem 0.6rem;
+    }
+    .announcement-alert {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .announcement-action {
+      width: 100%;
+      text-align: center;
+    }
+    .flyer-lightbox-box {
+      max-width: 96vw;
+      padding: 0.5rem;
+    }
+    .flyer-lightbox .modal-close {
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+    .flyer-lightbox-image {
+      max-height: calc(92vh - 1rem);
+    }
   }
 
 </style>
@@ -1231,16 +1390,16 @@
 <!-- TICKER -->
 <div class="ticker" aria-label="Announcements">
   <div class="ticker-inner">
-    <div class="ticker-item">MSc Mathematics Applications now open — Session 2025/2026</div>
-    <div class="ticker-item">Annual Mathematics Colloquium — March 15, 2025</div>
-    <div class="ticker-item">Prof. Adeyemi elected Fellow of the Nigerian Mathematical Society</div>
-    <div class="ticker-item">Undergraduate Registration Deadline — February 28, 2025</div>
-    <div class="ticker-item">Research Seminar Series: Stochastic Analysis — Thursdays 2PM</div>
-    <div class="ticker-item">MSc Mathematics Applications now open — Session 2025/2026</div>
-    <div class="ticker-item">Annual Mathematics Colloquium — March 15, 2025</div>
-    <div class="ticker-item">Prof. Adeyemi elected Fellow of the Nigerian Mathematical Society</div>
-    <div class="ticker-item">Undergraduate Registration Deadline — February 28, 2025</div>
-    <div class="ticker-item">Research Seminar Series: Stochastic Analysis — Thursdays 2PM</div>
+    <div class="ticker-item">Emerging Economy seminar - 8 July 2026, 11:00 AM prompt</div>
+    <div class="ticker-item">Special undergraduate lecture on optimization methods in machine learning - 24 June 2026, 10:00 AM</div>
+    <div class="ticker-item">Venue for current seminars: Departmental seminar room</div>
+    <div class="ticker-item">Department news and academic announcements are now available in the News section</div>
+    <div class="ticker-item">Click each flyer in the News section to zoom and view details</div>
+    <div class="ticker-item">Emerging Economy seminar - 8 July 2026, 11:00 AM prompt</div>
+    <div class="ticker-item">Special undergraduate lecture on optimization methods in machine learning - 24 June 2026, 10:00 AM</div>
+    <div class="ticker-item">Venue for current seminars: Departmental seminar room</div>
+    <div class="ticker-item">Department news and academic announcements are now available in the News section</div>
+    <div class="ticker-item">Click each flyer in the News section to zoom and view details</div>
   </div>
 </div>
 
@@ -1312,6 +1471,64 @@
     <div class="accent-block">
       "Mathematics is the language in which God has written the universe."
     </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news" id="news">
+  <div class="section-label">Latest News</div>
+  <h2 class="section-title">Department News &amp; Announcements</h2>
+  <p style="color:var(--text-muted); max-width:700px; line-height:1.8;">
+    Stay up to date with special lectures, seminars, and academic activities in the Department of Mathematics.
+  </p>
+
+  <div class="announcement-alert" role="status" aria-live="polite">
+    <div>
+      <div class="announcement-kicker">Announcement</div>
+      <h3>Emerging Economy seminar holds on 8 July 2026</h3>
+      <p>
+        Banji Osatumberu, MD/CEO of Market Scan International Nigeria, will speak on the relevance of a mathematician at the departmental seminar room.
+      </p>
+    </div>
+    <button class="announcement-action" type="button" onclick="openFlyerModal('images/emerging-economy-flyer.jpeg', 'Emerging Economy flyer enlarged view')">View flyer</button>
+  </div>
+
+  <div class="news-grid">
+    <article class="news-card">
+      <div class="news-card-image" style="background:#fff;">
+        <div class="img-label">News 1</div>
+        <button class="flyer-trigger" type="button" onclick="openFlyerModal('images/emerging-economy-flyer.jpeg', 'Emerging Economy flyer enlarged view')" aria-label="Open Emerging Economy flyer in full size">
+          <img src="images/emerging-economy-flyer.jpeg" alt="Flyer for the Emerging Economy seminar">
+          <span class="flyer-hint">Click to zoom</span>
+        </button>
+      </div>
+      <div class="news-body">
+        <div class="news-date">8 July 2026 &middot; 11:00 AM prompt</div>
+        <h3>Emerging Economy</h3>
+        <p>
+          Seminar on "What is the relevance of a Mathematician?" with Banji Osatumberu, MD/CEO, Market Scan International Nigeria. Venue: Departmental seminar room.
+        </p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <div class="news-card-image" style="background:#fff;">
+        <div class="img-label">News 2</div>
+        <button class="flyer-trigger" type="button" onclick="openFlyerModal('images/special-undergraduate-lecture.jpeg', 'Lecture flyer enlarged view')" aria-label="Open lecture flyer in full size">
+          <img src="images/special-undergraduate-lecture.jpeg" alt="Flyer for the special undergraduate lecture on optimization methods in machine learning">
+          <span class="flyer-hint">Click to zoom</span>
+        </button>
+      </div>
+      <div class="news-body">
+        <div class="news-date">24 June 2026 &middot; 10:00 AM - 12:30 PM</div>
+        <h3>A Special Undergraduate Lecture on Optimization Methods in Machine Learning</h3>
+        <p>
+          Lecturer: Adebanji Adelowo (Alumni).<br>
+          Venue: Departmental seminar room.<br>
+          Focus areas: ML as optimization, gradient descent, loss functions, regularization, Adam and adaptive optimizers, and Python.
+        </p>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -1412,48 +1629,6 @@
       <div class="research-symbol">𝜖</div>
       <h3>Solid Mechanics</h3>
       <p>Elasticity, plasticity, composite mechanics, phase change mechanics, and associated multi-field problems — bridging rigorous mathematical analysis with structural and material science applications.</p>
-    </div>
-  </div>
-</section>
-
-<!-- NEWS -->
-<section class="news" id="news">
-  <div class="section-label">News & Events</div>
-  <h2 class="section-title">Latest from the Department</h2>
-
-  <div class="news-grid">
-    <div class="news-card">
-      <div class="news-card-image" style="background: linear-gradient(135deg, #1a4a2e, #0d1f15);">
-        <div class="img-pattern">∑</div>
-        <div class="img-label">Featured</div>
-      </div>
-      <div class="news-body">
-        <div class="news-date">February 10, 2025</div>
-        <h3>Annual Mathematics Colloquium to Feature Nobel-Adjacent Research on Global Optimisation</h3>
-        <p>The department's flagship academic event will host Prof. Chinwe Okonkwo from the University of Lagos alongside three international guest speakers to present breakthroughs in convex optimisation theory.</p>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="news-card-image" style="background: linear-gradient(135deg, #2d1a0a, #1a0d05);">
-        <div class="img-pattern" style="color:rgba(200,149,42,0.25);">∫</div>
-        <div class="img-label">Award</div>
-      </div>
-      <div class="news-body">
-        <div class="news-date">January 22, 2025</div>
-        <h3>Prof. Adeyemi Elected Fellow of the Nigerian Mathematical Society</h3>
-        <p>A celebrated recognition of over two decades of distinguished contributions to algebraic topology and mentorship of postgraduate students.</p>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="news-card-image" style="background: linear-gradient(135deg, #0a1a2d, #05100d);">
-        <div class="img-pattern" style="color:rgba(42,100,200,0.25);">λ</div>
-        <div class="img-label">Seminar</div>
-      </div>
-      <div class="news-body">
-        <div class="news-date">January 9, 2025</div>
-        <h3>New Seminar Series: Stochastic Analysis for Complex Systems</h3>
-        <p>Every Thursday at 2PM in the Mathematics Building, join staff and students for cutting-edge presentations on stochastic differential equations and their engineering applications.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1582,6 +1757,88 @@
   </div>
 </section>
 
+<!-- NON-TEACHING STAFF -->
+<section style="background:#0d2a1a;padding:5rem 4rem;border-top:2px solid rgba(200,149,42,0.25);">
+  <div style="max-width:1400px;margin:0 auto;">
+
+    <div class="people-header" style="margin-bottom:2.5rem;">
+      <div>
+        <div class="section-label">Department Administration</div>
+        <h2 class="section-title">Non-Teaching &amp; Administrative Staff</h2>
+      </div>
+    </div>
+
+    <div class="people-grid">
+
+      <div class="person-card" onclick="openModal('staff_akeju')" role="button" tabindex="0">
+        <div class="person-photo-wrap">
+          <div class="person-photo-overlay"></div>
+          <div class="person-speciality">Administration</div>
+        </div>
+        <div class="person-body">
+          <div class="person-rank">Confidential Secretary I</div>
+          <div class="person-name">O. O. Akeju</div>
+          <div class="person-title">Administrative Support</div>
+          <span class="view-profile">View Profile →</span>
+        </div>
+      </div>
+
+      <div class="person-card" onclick="openModal('staff_olubusola')" role="button" tabindex="0">
+        <div class="person-photo-wrap">
+          <div class="person-photo-overlay"></div>
+          <div class="person-speciality">Administration</div>
+        </div>
+        <div class="person-body">
+          <div class="person-rank">Confidential Secretary</div>
+          <div class="person-name">Tunde-Adedipe Olubusola</div>
+          <div class="person-title">Administrative Support</div>
+          <span class="view-profile">View Profile →</span>
+        </div>
+      </div>
+
+      <div class="person-card" onclick="openModal('staff_famose')" role="button" tabindex="0">
+        <div class="person-photo-wrap">
+          <div class="person-photo-overlay"></div>
+          <div class="person-speciality">Laboratory</div>
+        </div>
+        <div class="person-body">
+          <div class="person-rank">Senior Lab. Superintendent</div>
+          <div class="person-name">Ms. F. C. Famose</div>
+          <div class="person-title">Laboratory Management</div>
+          <span class="view-profile">View Profile →</span>
+        </div>
+      </div>
+
+      <div class="person-card" onclick="openModal('staff_odewumi')" role="button" tabindex="0">
+        <div class="person-photo-wrap">
+          <div class="person-photo-overlay"></div>
+          <div class="person-speciality">Clerical</div>
+        </div>
+        <div class="person-body">
+          <div class="person-rank">Data Entry / Clerical Officer</div>
+          <div class="person-name">Mr. Odewumi Stephen</div>
+          <div class="person-title">Data & Records Management</div>
+          <span class="view-profile">View Profile →</span>
+        </div>
+      </div>
+
+      <div class="person-card" onclick="openModal('staff_ijiwande')" role="button" tabindex="0">
+        <div class="person-photo-wrap">
+          <div class="person-photo-overlay"></div>
+          <div class="person-speciality">Office Support</div>
+        </div>
+        <div class="person-body">
+          <div class="person-rank">Principal Office Assistant</div>
+          <div class="person-name">Mr. Ijiwande Funminiyi</div>
+          <div class="person-title">Office Support Services</div>
+          <span class="view-profile">View Profile →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ALUMNI LEGACY -->
 <section style="background:linear-gradient(135deg,#0d2a1a 0%,#1a4a2e 50%,#0d2a1a 100%);padding:6rem 4rem;position:relative;overflow:hidden;">
   <!-- decorative background element -->
@@ -1699,7 +1956,7 @@
         <div class="contact-icon">✉</div>
         <div class="contact-detail">
           <strong>Email</strong>
-          mathdept@oauife.edu.ng
+          <a href="mailto:math@oauife.edu.ng">math@oauife.edu.ng</a>
         </div>
       </div>
       <div class="contact-item">
@@ -1792,6 +2049,14 @@
   </div>
 </div>
 
+<!-- FLYER LIGHTBOX -->
+<div class="modal-overlay flyer-lightbox" id="flyerModal" role="dialog" aria-modal="true" aria-label="Lecture Flyer">
+  <div class="flyer-lightbox-box">
+    <button class="modal-close" id="flyerModalClose" aria-label="Close flyer">&#x2715;</button>
+    <img class="flyer-lightbox-image" id="flyerModalImage" src="images/special-undergraduate-lecture.jpeg" alt="Lecture flyer enlarged view">
+  </div>
+</div>
+
 <script>
 (function() {
   var staffData = {
@@ -1804,13 +2069,20 @@
       email: "sokoya@oauife.edu.ng",
       email2: "ssokoya2003@yahoo.it",
       phone: "+234 803 562 2581",
-      bio: "Professor Okoya graduated with a First-Class Honours degree in Mathematics from OAU in 1983, earning his M.Sc. and Ph.D. from the same University in 1986 and 1989. He joined OAU as a Graduate Assistant in 1984 and became a Professor in 2003 — the first fully-bred alumnus to attain the position of Professor and Head of the Mathematics Department (2008–2011). He is a Fellow of the Nigerian Mathematical Society (NMS) and the Mathematical Association of Nigeria (MAN), a member of the American Mathematical Society (2000–date), and the first Occupier of the Pastor E. A. Adeboye Professorial Chair in Mathematics, University of Lagos (2013–2017). He has been invited four times to the International Congress of Mathematicians (1994 Switzerland, 1998 Germany, 2022 Finland, 2026 USA).",
+      bio: "Professor Okoya graduated with a First-Class Honours degree in Mathematics from the Department of Mathematics, University of Ife (now OAU), Ile-Ife, in 1983. He subsequently earned M.Sc. and Ph.D. (Mathematics) from the same University in 1986 and 1989, respectively. He joined OAU as a Graduate Assistant in 1984 and rose through the ranks to become a Professor in 2003 — the first fully-bred alumnus to attain the position of Professor and Head of the Mathematics Department (2008–2011) at OAU. He is a life member of the Nigerian Mathematical Society (NMS) and the Mathematical Association of Nigeria (MAN), and a member of the American Mathematical Society (2000–date). He served the NMS as Treasurer (2006–2011), Editor-in-Chief of the Journal of NMS (2011–2022), Member of the Board of Trustees (2011–date), Editor of the Notices of the NMS (2016–2022), and Coordinator of the Fellows of the NMS (2024–date). He is a Fellow of both NMS and MAN, and has delivered keynote addresses, plenary talks, and lead papers at national conferences and scientific meetings. He has been invited four times to the International Congress of Mathematicians to deliver a paper (1994, Switzerland; 1998, Germany; 2022, Finland; 2026, USA). He was a recipient of many international Fellowships and grants for study visits to institutions in the UK, Austria, Germany, USA, and Italy. He was a TWAS Associate (1997–1999) in Chennai, India, and a Regular Associate to the Abdus Salam International Centre for Theoretical Physics (ICTP), Trieste, Italy (2001–2006). He was also the first Occupier of the Pastor E. A. Adeboye Professorial Chair in Mathematics, University of Lagos (2013–2017).",
       hobbies: [],
       photo: "__IMG_okoya__",
       pubs: [
-        {cite:"Opadiran S. I., Ireka I. E., Niedziela D., Raps D., Okoya S. S. (2026): Modelling and investigation of the influence of operating conditions on the expansion process of extruded polystyrene foam.", journal:"Materials Today Communications, 51, 114846 · Elsevier"},
-        {cite:"Aroloye S. J., Fenuga O. J., Abiala I. O., Okoya S. S. (2024): Magnetohydrodynamic flow of third-grade nanofluid with convective boundary conditions.", journal:"Science World Journal 19(4), 1–8"},
-        {cite:"Salawu S. O. and Okoya S. S. (2024): Exothermic diffusion-reaction and explosion branch-chain of an asymmetrical heating channel with convective cooling.", journal:"Combustion Science and Technology, 1–15 · Taylor and Francis"}
+        {cite:"Opadiran S. I., Ireka I. E., Niedziela D., Raps D., Okoya S. S. (2026): Modelling and investigation of the influence of operating conditions on the expansion process of extruded polystyrene foam.", journal:"Materials Today Communications, 51, 114846 · Elsevier · https://doi.org/10.1016/j.mtcomm.2026.114846"},
+        {cite:"Aroloye S. J., Fenuga O. J., Abiala I. O., Okoya S. S. (2024): Magnetohydrodynamic flow of third-grade nanofluid with convective boundary conditions.", journal:"Science World Journal 19(4), 1–8 · https://dx.doi.org/10.4314/swj.v19i4.24"},
+        {cite:"Salawu S. O. and Okoya S. S. (2024): Exothermic diffusion-reaction and explosion branch-chain of an asymmetrical heating channel with convective cooling.", journal:"Combustion Science and Technology, 1–15 · Taylor and Francis · https://doi.org/10.1080/00102202.2023.2283193"},
+        {cite:"Wang F. Z., Animasaun I. L., Muhammad T., and Okoya S. S. (2024): Recent Advancements in Fluid Dynamics: Drag Reduction, Lift Generation, Computational Fluid Dynamics, Turbulence Modelling and Multiphase Flow.", journal:"Arabian Journal for Science and Engineering · Springer · https://doi.org/10.1007/s13369-024-08945-3"},
+        {cite:"Fatunmbi E. O. and Okoya S. S. (2024): Nonlinear radiative thermal analysis of magneto-micropolar fluid over a bidirectionally extending sheet with varied thermal conditions.", journal:"Case Studies in Thermal Engineering, 60, 104712 · Elsevier · https://doi.org/10.1016/j.csite.2024.104712"},
+        {cite:"Fatunmbi E. O., Akanbi O. O. and Okoya S. S. (2023): Dynamics of heat transfer in Magneto-Micropolar fluids flow past a vertically expanding sheet featuring prescribed wall temperature (PWT).", journal:"Defect and Diffusion Forum, 424, 99–112"},
+        {cite:"Salawu S. O. and Okoya S. S. (2023): Temperature distribution and thermal criticality of kinetics exothermic reactant in concentric cylinders subject to various boundary conditions.", journal:"ChemEngineering, 7(2), 19, 1–16 · https://doi.org/10.3390/chemengineering7020019"},
+        {cite:"Animasaun L., Kumar T. K., Noah F. A., Okoya S. S., Ai-Mdallal Q. M. and Bhatti M. M. (2023): Insight into Darcy flow of ternary-hybrid nanofluid on horizontal surfaces: Exploration of the effects of convective and unsteady acceleration.", journal:"Z Angew Math Mech, 103(5), e202200197 · Wiley · DOI: 10.1002/zamm.202200197"},
+        {cite:"Fatunmbi E. O., Adeosun A. T. and Okoya S. S. (2023): Entropy generation analysis in an unsteady hydromagnetic micropolar fluid flow along an exponentially stretchable sheet with slip properties.", journal:"International Journal of Modelling and Simulation, 43(4), 491–506 · Taylor and Francis"},
+        {cite:"Salawu S. O., Obalalu A. M. and Okoya S. S. (2022): Thermal convection and solar radiation of electromagnetic actuator and hybrid nanofluids for solar collector optimization.", journal:"Materials Today Communications, 33, 104763 · Elsevier · https://doi.org/10.1016/j.mtcomm.2022.104763"}
       ]
     },
     oguntade: {
@@ -1861,6 +2133,66 @@
       bio: "Ajao Saheed Oladele attended the University of Ilorin for his first degree, where he was awarded a B.Sc. (Ed) in Mathematics in 2006. In 2012, he earned an M.Tech in Applied Mathematics from Ladoke Akintola University of Technology (LAUTECH), Ogbomoso, Nigeria. He also obtained his Ph.D. in Applied Mathematics from the same university in 2019. His research focuses on mathematical modelling with a specialisation in epidemiological modelling.",
       hobbies: [],
       photo: "__IMG_ajao__",
+      pubs: []
+    },
+    staff_akeju: {
+      name: "Olushola Omotayo Akeju",
+      rank: "Confidential Secretary I",
+      qual: "OND (2005), CIPSSON",
+      spec: "Administrative Support",
+      office: "Mathematics Department, OAU Ile-Ife",
+      email: "",
+      phone: "",
+      hobbies: [],
+      photo: null,
+      pubs: []
+    },
+    staff_olubusola: {
+      name: "Tunde-Adedipe Olubusola",
+      rank: "Confidential Secretary",
+      qual: "WASCE (1989), NCE (1993), B.Ed (2005), EDP",
+      spec: "Administrative Support",
+      office: "Mathematics Department, OAU Ile-Ife",
+      email: "",
+      phone: "",
+      hobbies: [],
+      photo: null,
+      pubs: []
+    },
+    staff_famose: {
+      name: "Ms. Fisayo Christianah Famose",
+      rank: "Senior Laboratory Superintendent",
+      qual: "NECO (2004), EDP (1995), DCT (1998), ND (1998), HND (2002), PGD (2015), B.Sc. (2018)",
+      spec: "Laboratory Management",
+      office: "Mathematics Department, OAU Ile-Ife",
+      email: "",
+      phone: "",
+      hobbies: [],
+      photo: null,
+      pubs: []
+    },
+    staff_odewumi: {
+      name: "Mr. Odewumi Stephen",
+      rank: "Data Entry / Clerical Officer",
+      qual: "OND (2014)",
+      spec: "Data & Records Management",
+      office: "Mathematics Department, OAU Ile-Ife",
+      email: "",
+      phone: "",
+      hobbies: [],
+      photo: null,
+      pubs: []
+    },
+    staff_ijiwande: {
+      name: "Mr. Ijiwande Funminiyi",
+      rank: "Principal Office Assistant",
+      qual: "SSCE",
+      spec: "Office Support Services",
+      office: "Mathematics Department, OAU Ile-Ife",
+      email: "",
+      phone: "",
+      hobbies: [],
+      photo: null,
       pubs: []
     },
     ogundare: {
@@ -1951,6 +2283,14 @@
     }
   };
 
+  function syncModalScrollLock() {
+    var profileOpen = document.getElementById('profileModal').classList.contains('open');
+    var flyerOpen = document.getElementById('flyerModal').classList.contains('open');
+    document.body.style.overflow = (profileOpen || flyerOpen) ? 'hidden' : '';
+  }
+
+  var flyerPreviousFocus = null;
+
   window.openModal = function(key) {
     var d = staffData[key];
     if (!d) return;
@@ -2020,20 +2360,51 @@
     }
 
     document.getElementById('profileModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    syncModalScrollLock();
   };
 
   function closeModal() {
     document.getElementById('profileModal').classList.remove('open');
-    document.body.style.overflow = '';
+    syncModalScrollLock();
+  }
+
+  window.openFlyerModal = function(src, alt) {
+    flyerPreviousFocus = document.activeElement;
+    var flyerImage = document.getElementById('flyerModalImage');
+    if (src) flyerImage.src = src;
+    if (alt) flyerImage.alt = alt;
+    document.getElementById('flyerModal').setAttribute('aria-label', alt || 'Announcement flyer');
+    document.getElementById('flyerModal').classList.add('open');
+    syncModalScrollLock();
+    document.getElementById('flyerModalClose').focus();
+  };
+
+  function closeFlyerModal() {
+    document.getElementById('flyerModal').classList.remove('open');
+    syncModalScrollLock();
+    if (flyerPreviousFocus && typeof flyerPreviousFocus.focus === 'function') {
+      flyerPreviousFocus.focus();
+    }
+    flyerPreviousFocus = null;
   }
 
   document.getElementById('modalClose').addEventListener('click', closeModal);
   document.getElementById('profileModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
+  document.getElementById('flyerModalClose').addEventListener('click', closeFlyerModal);
+  document.getElementById('flyerModal').addEventListener('click', function(e) {
+    if (e.target === this) closeFlyerModal();
+  });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('flyerModal').classList.contains('open')) {
+      closeFlyerModal();
+      return;
+    }
+    if (document.getElementById('profileModal').classList.contains('open')) {
+      closeModal();
+    }
   });
 })();
 </script>
